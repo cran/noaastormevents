@@ -1,45 +1,56 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="Brooke Anderson and Ziyu Chen" />
 
-<meta name="date" content="2019-04-02" />
+<meta name="date" content="2021-01-20" />
 
 <title>Details of noaastormevents</title>
 
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -48,9 +59,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -96,7 +107,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -107,189 +118,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<style type="text/css">body {
-background-color: #fff;
-margin: 1em auto;
-max-width: 700px;
-overflow: visible;
-padding-left: 2em;
-padding-right: 2em;
-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 14px;
-line-height: 1.35;
-}
-#header {
-text-align: center;
-}
-#TOC {
-clear: both;
-margin: 0 0 10px 10px;
-padding: 4px;
-width: 400px;
-border: 1px solid #CCCCCC;
-border-radius: 5px;
-background-color: #f6f6f6;
-font-size: 13px;
-line-height: 1.3;
-}
-#TOC .toctitle {
-font-weight: bold;
-font-size: 15px;
-margin-left: 5px;
-}
-#TOC ul {
-padding-left: 40px;
-margin-left: -1.5em;
-margin-top: 5px;
-margin-bottom: 5px;
-}
-#TOC ul ul {
-margin-left: -2em;
-}
-#TOC li {
-line-height: 16px;
-}
-table {
-margin: 1em auto;
-border-width: 1px;
-border-color: #DDDDDD;
-border-style: outset;
-border-collapse: collapse;
-}
-table th {
-border-width: 2px;
-padding: 5px;
-border-style: inset;
-}
-table td {
-border-width: 1px;
-border-style: inset;
-line-height: 18px;
-padding: 5px 5px;
-}
-table, table th, table td {
-border-left-style: none;
-border-right-style: none;
-}
-table thead, table tr.even {
-background-color: #f7f7f7;
-}
-p {
-margin: 0.5em 0;
-}
-blockquote {
-background-color: #f6f6f6;
-padding: 0.25em 0.75em;
-}
-hr {
-border-style: solid;
-border: none;
-border-top: 1px solid #777;
-margin: 28px 0;
-}
-dl {
-margin-left: 0;
-}
-dl dd {
-margin-bottom: 13px;
-margin-left: 13px;
-}
-dl dt {
-font-weight: bold;
-}
-ul {
-margin-top: 0;
-}
-ul li {
-list-style: circle outside;
-}
-ul ul {
-margin-bottom: 0;
-}
-pre, code {
-background-color: #f7f7f7;
-border-radius: 3px;
-color: #333;
-white-space: pre-wrap; 
-}
-pre {
-border-radius: 3px;
-margin: 5px 0px 10px 0px;
-padding: 10px;
-}
-pre:not([class]) {
-background-color: #f7f7f7;
-}
-code {
-font-family: Consolas, Monaco, 'Courier New', monospace;
-font-size: 85%;
-}
-p > code, li > code {
-padding: 2px 0px;
-}
-div.figure {
-text-align: center;
-}
-img {
-background-color: #FFFFFF;
-padding: 2px;
-border: 1px solid #DDDDDD;
-border-radius: 3px;
-border: 1px solid #CCCCCC;
-margin: 0 5px;
-}
-h1 {
-margin-top: 0;
-font-size: 35px;
-line-height: 40px;
-}
-h2 {
-border-bottom: 4px solid #f7f7f7;
-padding-top: 10px;
-padding-bottom: 2px;
-font-size: 145%;
-}
-h3 {
-border-bottom: 2px solid #f7f7f7;
-padding-top: 10px;
-font-size: 120%;
-}
-h4 {
-border-bottom: 1px solid #f7f7f7;
-margin-left: 8px;
-font-size: 105%;
-}
-h5, h6 {
-border-bottom: 1px solid #ccc;
-font-size: 105%;
-}
-a {
-color: #0033dd;
-text-decoration: none;
-}
-a:hover {
-color: #6666ff; }
-a:visited {
-color: #800080; }
-a:visited:hover {
-color: #BB00BB; }
-a[href^="http:"] {
-text-decoration: underline; }
-a[href^="https:"] {
-text-decoration: underline; }
 
-code > span.kw { color: #555; font-weight: bold; } 
-code > span.dt { color: #902000; } 
-code > span.dv { color: #40a070; } 
-code > span.bn { color: #d14; } 
-code > span.fl { color: #d14; } 
-code > span.ch { color: #d14; } 
-code > span.st { color: #d14; } 
-code > span.co { color: #888888; font-style: italic; } 
-code > span.ot { color: #007020; } 
-code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
-</style>
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
 
 
 
@@ -303,7 +133,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Details of <code>noaastormevents</code></h1>
 <h4 class="author">Brooke Anderson and Ziyu Chen</h4>
-<h4 class="date">2019-04-02</h4>
+<h4 class="date">2021-01-20</h4>
 
 
 
@@ -328,23 +158,23 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h2>Downloading NOAA Storm Events data for a year</h2>
 <p>The database data is stored in files separated by year, so the file for an entire year is identified and downloaded when a user asks for event listings from any time or any type of event that year. For example, if a user wants to list flood events from the week of Hurricane Floyd in 1999, functions in the <code>noaastormevents</code> package would first identify and download the full “Details” data file for 1999 and then filter down to flood events starting in the correct week.</p>
 <p>To identify the online file path for a specific year, the <code>find_file_name</code> function in the <code>noaastormevents</code> package uses the <code>htmltab</code> function (from the package of the same name) to create a dataframe listing all files available for download from the NOAA Storm Events database. The function then uses regular expressions to identify the file name in that listing for the requested year. For example, the name of the file with “Details” information for 1999 can be determined with:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">find_file_name</span>(<span class="dt">year =</span> <span class="st">&quot;1999&quot;</span>, <span class="dt">file_type =</span> <span class="st">&quot;detail&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find_file_name</span>(<span class="at">year =</span> <span class="st">&quot;1999&quot;</span>, <span class="at">file_type =</span> <span class="st">&quot;detail&quot;</span>)</span></code></pre></div>
 <p>Here is the full definition of the <code>find_file_name</code> function:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">find_file_name</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>find_file_name</span></code></pre></div>
 <p>Typically, this function will only be used internally rather than called directly by a user.</p>
 <p>Once the file name has been determined, a function in the package then downloads that file to the user’s computer. For some years, files are very large, so this download can take a little while. To avoid downloading data from the same year more than once within an R session, the downloading function stores the downloaded data for that year in a temporary environment in the R user’s session. In later requests for the same year, the function will first check for data from this year in the temporary environment and only download the data from the online database if it is not already available on the user’s computer.</p>
 <p>This environment is created to be temporary, which means that it is deleted at the end of the current R session. While some packages that access online databases cache any downloaded data in a way that persists between R sessions, we chose not to do that and instead only cache within an R session, but delete all data at the close of the R session. This is because some of the Storm Event files are very large, and most users will likely only want to keep a small subset of the data for a given year (e.g., only flood events during the week of Hurricane Floyd). It would be wasteful of memory to cache all the 1999 data indefinitely on the user’s computer in this case; instead, the user should use our package to create the desired subset of the data and then explicitly store that subset locally to use in future analysis.</p>
 <p>The function for downloading the file for a year is called <code>download_storm_data</code>. Here is it’s full definition:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">noaastormevents<span class="op">:::</span>download_storm_data</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>noaastormevents<span class="sc">:::</span>download_storm_data</span></code></pre></div>
 <p>Finally, the <code>noaastormevents</code> package allows a user to query storm events either by a date range or by a named historical tropical storm, rather than a year. The <code>create_storm_data</code> function inputs either a date range or a storm name, as well as the requested file type, and downloads data for the appropriate year or years. If the user requests a date range, the function will download yearly data files for all years included in that range. If the user requests a tropical storm, the function will pull the data for that particular year. Here is the full definition of <code>create_storm_data</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">create_storm_data</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>create_storm_data</span></code></pre></div>
 <p>As a note, many of the functions in the <code>noaastormevents</code> package that allow linking events with tropical storms rely on historical data for the storms, including storm tracks, estimated distances to eastern U.S. counties, and dates when the storm was closest to each county. The package pulls this historical data from the <code>hurricaneexposuredata</code> package, through the interfacing package <code>hurricaneexposure</code>. The hurricane data goes from 1988 to (currently) 2015 and includes all Atlantic basin tropical storms that came within 250 km of at least one U.S. county. The following storms are included in that package and so available to be used for functions in <code>noaastormevents</code>:</p>
 </div>
 <div id="structure-of-details-data-files" class="section level2">
 <h2>Structure of “Details” data files</h2>
 <p>While the <code>noaastormevent</code> package focuses on higher-level functions, which result in a simplified and cleaned version of this storm events data, a user can use the <code>create_storm_data</code> function to pull the full dataset for a year into R and work with the raw, uncleaned version. For example, here is a call that pulls the raw data for 2015 into an R object called <code>events_2015</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">events_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">create_storm_data</span>(<span class="dt">date_range =</span> <span class="kw">c</span>(<span class="st">&quot;2015-01-01&quot;</span>, <span class="st">&quot;2015-12-31&quot;</span>))</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="kw">slice</span>(events_<span class="dv">2015</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>events_2015 <span class="ot">&lt;-</span> <span class="fu">create_storm_data</span>(<span class="at">date_range =</span> <span class="fu">c</span>(<span class="st">&quot;2015-01-01&quot;</span>, <span class="st">&quot;2015-12-31&quot;</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice</span>(events_2015, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
 <p>This raw data has 51 columns. This includes:</p>
 <ul>
 <li>the date and time of the beginning and end of the event (<code>BEGIN_YEARMONTH</code>, <code>BEGIN_DAY</code>, <code>BEGIN_TIME</code>, <code>BEGIN_DATE_TIME</code>, <code>END_YEARMONTH</code>, <code>END_DAY</code>, <code>END_TIME</code>, <code>END_DATE_TIME</code>)</li>
@@ -366,14 +196,14 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h3>Episodes versus events</h3>
 <p>“Episodes” seem to collect related “events”, where events can vary in the type or location of the event, while an “episode” collects events that belong to the same large system. The following graph shows, for each episode listed in 2015, the number of events listed for the episode (x-axis) and the size (in days) of the range of begin dates across events in the episode.</p>
 <p>An episode will never include events in more than one state, so a large weather system could potentially be described by multiple episodes in different states:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">events_<span class="dv">2015</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="st">  </span><span class="kw">select</span>(EPISODE_ID, STATE) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(EPISODE_ID) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n_states =</span> <span class="kw">length</span>(<span class="kw">unique</span>(STATE))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">max_n_states =</span> <span class="kw">max</span>(n_states))</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>events_2015 <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(EPISODE_ID, STATE) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(EPISODE_ID) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_states =</span> <span class="fu">length</span>(<span class="fu">unique</span>(STATE))) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">max_n_states =</span> <span class="fu">max</span>(n_states))</span></code></pre></div>
 <p>Here are maps with the beginning locations of events in the episodes with the most events in 2015. Note that the beginning latitude and longitude are not listed for every event, resulting in one of the episodes not having any points on the map. From the other maps, it is clear that events within the episode were fairly close together.</p>
-<p>For these episodes with the most events in 2015, the following graph shows the number of events reported for the episode. One of the episode was a winter storm, another was heavy rains and floods, while the rest of the episodes included high winds, hail, tornadoes, rain, and / or flooding.</p>
+<p>For these episodes with the most events in 2015, the following graph shows the number of events reported for the episode. One of the episodes was a winter storm, another was heavy rains and floods, while the rest of the episodes included high winds, hail, tornadoes, rain, and / or flooding.</p>
 <p>Once we removed event types with less that 50 listings in 2015, we did a cluster analysis of event types, to group events that are more likely to occur together within an episode. The following plot shows the resulting cluster structure of these event types.</p>
 <p>The next graph shows the number of events of each event type (excluding event types with less than 50 total listings in 2015). Each row represents an episode.</p>
 </div>
@@ -398,11 +228,11 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <ol style="list-style-type: decimal">
 <li>Tries to match <code>cz_name</code> to the county name in <code>county.fips</code> after removing any periods or apostrophes in <code>cz_name</code>.</li>
 <li>Next, for county names with ‘county’ in them, try to match the word before ‘county’ to county name in <code>county.fips</code>. Then check the two words before ‘county’, then the one and two words before ‘counties’.</li>
-<li>Next, pull out the last word in <code>cz_name</code> and try to match it to the county name in <code>county.fips</code>. The check the last two words in <code>cz_name</code>, then check the last three words in <code>cz_name</code>.</li>
+<li>Next, pull out the last word in <code>cz_name</code> and try to match it to the county name in <code>county.fips</code>. Then check the last two words in <code>cz_name</code>, then check the last three words in <code>cz_name</code>.</li>
 <li>Next, pull any words right before a slash and check that against the county name.</li>
 <li>Finally, try removing anything in parentheses in <code>cz_name</code> before matching.</li>
 </ol>
-<p>In addition, there are a few final steps in cleaning the data. First, all listings with “Utah” in the <code>cz_name</code> are set to missing– while there is a Utah County, Utah, from inspection of event listings in 2015, events in Utah with “Utah” in <code>cz_name</code> often referred to parts of the state, rather than to the county. Further, any event with “National Park” listed in <code>cz_name</code> is set to not match with a county FIPS. In Wyoming, Park County was being match to a <code>cz_name</code> for Yellowstone National Park, and this could be a problem in other states, so this extra check was included.</p>
+<p>In addition, there are a few final steps in cleaning the data. First, all listings with “Utah” in the <code>cz_name</code> are set to missing– while there is a Utah County, Utah, from inspection of event listings in 2015, events in Utah with “Utah” in <code>cz_name</code> often referred to parts of the state, rather than to the county. Further, any event with “National Park” listed in <code>cz_name</code> is set to not match with a county FIPS. In Wyoming, Park County was being matched to a <code>cz_name</code> for Yellowstone National Park, and this could be a problem in other states, so this extra check was included.</p>
 <p>In the 2015 events data, there are 22,664 events listed by forecast zone rather than county. Once the <code>match_forecast_county</code> function is applied to these events, 16,405 events were linked to a county (72%) while 6,259 events (28%) could not be matched to a county.</p>
 <p>Of the events not matched to a county, 2,997 events were outside the continental U.S. (i.e., in Hawaii, Alaska, U.S. territories, or waters):</p>
 <p>This left 3,262 events in the continental U.S. that were listed by forecast zone but could not be linked to a county by the <code>match_forecast_county</code> function. Most of these events had a value for <code>cz_name</code> with words related to mountains, water, adjacency (e.g., “area of”, “vicinity of”), or a few other word types (e.g., “desert”, “hwy”). The following table gives the number of these remaining unmatched events with words from each of these categories (note: the <code>cz_name</code> for an event may have words from more than one of these categories, in which case it would be counted in this table under both categories).</p>
@@ -410,12 +240,12 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>For 2015, here are the <code>cz_name</code> values for the events that could not be matched to a county and did not include the words listed above:</p>
 <p>For the events listed by forecast zone that could be successfully matched to a county, here are the geographic distributions in event counts in 2015:</p>
 <p>When using this function, and for event listings generated using this function, the user may want to hand-check that event listings with names like “Lake” and “Mountain” in the <code>cz_name</code> column are not erroneously matched to counties with names like “Lake County” and “Mountain County”. Code like the following can be used for these checks (in this case, checking a dataframe of event listings named <code>z_events_2015</code> that is output from <code>match_forecast_county</code> and so has <code>fips</code> added for each event listing, if a match could be found):</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">z_events_<span class="dv">2015</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="st">  </span><span class="kw">filter</span>(cz_type <span class="op">==</span><span class="st"> &quot;Z&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="st">  </span><span class="kw">select</span>(cz_name, state, fips) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cz_name =</span> <span class="kw">str_to_title</span>(cz_name)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">str_detect</span>(cz_name, <span class="st">&quot;Lake&quot;</span>) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(fips))  <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="st">  </span><span class="kw">distinct</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>z_events_2015 <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cz_type <span class="sc">==</span> <span class="st">&quot;Z&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(cz_name, state, fips) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cz_name =</span> <span class="fu">str_to_title</span>(cz_name)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(cz_name, <span class="st">&quot;Lake&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(fips))  <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span></code></pre></div>
 </div>
 <div id="impact-measurements" class="section level3">
 <h3>Impact measurements</h3>
@@ -429,7 +259,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li><code>DAMAGE_CROPS</code></li>
 </ul>
 <p>Many of the impact values are given using abbreviations for amounts. For example, this listing for a tornado gives the property damage as “5.00K”:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">county_events_<span class="dv">2015</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(event_id <span class="op">==</span><span class="st"> &quot;582970&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>county_events_2015 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(event_id <span class="sc">==</span> <span class="st">&quot;582970&quot;</span>)</span></code></pre></div>
 <p>Therefore, the <code>noaastormevents</code> package uses a function to pull out these abbreviations and convert associated impact values to numeric values (e.g., 5000 for “5.00K”). The conversions conducted are:</p>
 <ul>
 <li>“K” = 1,000</li>
@@ -438,7 +268,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li>“T” = 1,000,000,000,000</li>
 </ul>
 <p>This is done by the function <code>parse_damage</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">parse_damage</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>parse_damage</span></code></pre></div>
 <p>Usually, it seems that the cost per events within an episode do not overlap, so that the costs from all events in an episode can be summed to generate a total damage cost. While in some cases, different event listings within the same county in the same episode have the same damage cost, it often seems that the total cost was divided in these cases across events, as in this case, where the total estimated cost of $6,186,909 in the county (see the narratives) was spread evenly over the two event listings:</p>
 <p>However, there are a few cases where it appears that costs might be duplicated over different events within the same episode in a county. For example, in the following listing, it looks like the total estimated damage cost of $1.7 million (see that narrative) is repeated over the two listed events, which would mean that adding damages across events in the episode would lead to a county damage cost of twice the true amount.</p>
 <p>Of the times when a county had two or more events as part of the same episode in 2015, in 3,136 (87%) cases the damage costs were not identical across the event listings for the county and episode, while in 452 cases (13%) the cost listings were identical across event listings (as shown in the cases just given). If using damage cost estimates for research, it may be wise to hand-check for cases where damage cost estimates are duplicated across different events in a way that prevents summing across events to get the cumulative episode total cost.</p>
@@ -449,6 +279,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </div>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

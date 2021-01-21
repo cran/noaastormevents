@@ -56,6 +56,8 @@ download_storm_data <- function(year, file_type = "details"){
 #' floyd_data2 <- create_storm_data(storm = "Floyd-1999")
 #' }
 #'
+#' @importFrom magrittr %>%
+#'
 #' @export
 create_storm_data <- function(date_range = NULL, storm = NULL,
                               file_type = "details") {
@@ -75,14 +77,14 @@ create_storm_data <- function(date_range = NULL, storm = NULL,
       }
     }
   } else if (!is.null(storm)){ ## Otherwise, pull for the year of the storm
-    storm_year <- as.numeric(gsub("[^0-9]", "", storm))
+    storm_year <- stringr::str_extract(storm, "\\-[0-9].+") %>%
+      stringr::str_remove("\\-")
     download_storm_data(year = storm_year, file_type = file_type)
     storm_data <- noaastormevents_package_env$lst[[as.character(storm_year)]]
   } else {
     stop("You must specify either `date_range` or `storm`.")
   }
 
-  storm_data <- dplyr::tbl_df(storm_data)
-
+  storm_data <- tibble::as_tibble(storm_data)
   return(storm_data)
 }

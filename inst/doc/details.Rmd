@@ -31,6 +31,7 @@ library(forcats)
 library(dplyr)
 library(tidyr)
 library(viridis)
+library(magrittr)
 
 library(noaastormevents)
 ```
@@ -165,6 +166,7 @@ The following sections provide some summary statistics for data from this databa
 
 In the 2015 event listings, here are the types of events and the number of reported events for each: 
 
+
 ```{r echo = FALSE}
 events_2015 %>%
   group_by(EVENT_TYPE) %>%
@@ -250,7 +252,7 @@ events_2015 %>%
   theme_void()
 ```
 
-For these episodes with the most events in 2015, the following graph shows the number of events reported for the episode. One of the episode was a winter storm, another was heavy rains and floods, while the rest of the episodes included high winds, hail, tornadoes, rain, and / or flooding. 
+For these episodes with the most events in 2015, the following graph shows the number of events reported for the episode. One of the episodes was a winter storm, another was heavy rains and floods, while the rest of the episodes included high winds, hail, tornadoes, rain, and / or flooding. 
 
 ```{r echo = FALSE, fig.align = "center", fig.width = 6, fig.height = 4}
 top_episodes <- events_2015 %>%
@@ -565,11 +567,11 @@ Within the code in `noaastormevents`, the `match_forecast_county` is used to try
    to county name in `county.fips`. Then check the two words before 'county', then the
    one and two words before 'counties'.
 3. Next, pull out the last word in `cz_name` and try to match it to the county name
-  in `county.fips`. The check the last two words in `cz_name`, then check the last three words in `cz_name`.
+  in `county.fips`. Then check the last two words in `cz_name`, then check the last three words in `cz_name`.
 4. Next, pull any words right before a slash and check that against the county name.
 5. Finally, try removing anything in parentheses in `cz_name` before matching.
 
-In addition, there are a few final steps in cleaning the data. First, all listings with "Utah" in the `cz_name` are set to missing-- while there is a Utah County, Utah, from inspection of event listings in 2015, events in Utah with "Utah" in `cz_name` often referred to parts of the state, rather than to the county. Further, any event with "National Park" listed in `cz_name` is set to not match with a county FIPS. In Wyoming, Park County was being match to a `cz_name` for Yellowstone National Park, and this could be a problem in other states, so this extra check was included. 
+In addition, there are a few final steps in cleaning the data. First, all listings with "Utah" in the `cz_name` are set to missing-- while there is a Utah County, Utah, from inspection of event listings in 2015, events in Utah with "Utah" in `cz_name` often referred to parts of the state, rather than to the county. Further, any event with "National Park" listed in `cz_name` is set to not match with a county FIPS. In Wyoming, Park County was being matched to a `cz_name` for Yellowstone National Park, and this could be a problem in other states, so this extra check was included. 
 
 ```{r echo = FALSE}
 z_events_2015 <- events_2015 %>%
@@ -884,7 +886,8 @@ county_damage_2015 %>%
                             labels = c("Damage", "No damage"))) %>% 
   group_by(event_type, no_damage) %>% 
   count() %>% 
-  ggplot(aes(x = fct_reorder(event_type, n, fun = sum), y = n, fill = no_damage)) + 
+  mutate(event_type = as_factor(event_type)) %>% 
+  ggplot(aes(x = fct_reorder(event_type, n, .fun = sum), y = n, fill = no_damage)) + 
   geom_bar(stat = "identity") + 
   coord_flip() + 
   theme_classic() + 
@@ -897,6 +900,8 @@ county_damage_2015 %>%
 The following figure shows the top 50 episodes in terms of damages (property and crop damage combined) in 2015:
 
 ```{r fig.height = 10, fig.width = 7, fig.align = "center", echo = FALSE}
+library(maps)
+data(state.fips)
 ex <- county_events_2015 %>% 
   filter(str_to_lower(state) %in% as.character(state.fips$polyname)) %>% 
   unite(begin_date, begin_yearmonth, begin_day, sep = "-") %>% 

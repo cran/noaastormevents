@@ -1,4 +1,4 @@
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 not_cran <- Sys.getenv("NOT_CRAN") == "true"
 hasData <- requireNamespace("hurricaneexposuredata", quietly=TRUE)
 if (!not_cran | !hasData) {
@@ -11,7 +11,7 @@ if (!not_cran | !hasData) {
     message(msg)
 }
 
-## ----echo = FALSE, message = FALSE, warning = FALSE----------------------
+## ----echo = FALSE, message = FALSE, warning = FALSE---------------------------
 #  library(ggplot2)
 #  library(stringr)
 #  library(lubridate)
@@ -19,10 +19,11 @@ if (!not_cran | !hasData) {
 #  library(dplyr)
 #  library(tidyr)
 #  library(viridis)
+#  library(magrittr)
 #  
 #  library(noaastormevents)
 
-## ----echo = FALSE, fig.width = 6, fig.height = 4, fig.align = "center"----
+## ----echo = FALSE, fig.width = 6, fig.height = 4, fig.align = "center"--------
 #  url <- paste0("http://www1.ncdc.noaa.gov/pub/data/swdi/",
 #                  "stormevents/csvfiles/")
 #  times_translation <- data_frame(times = c("K", "M", "G"),
@@ -57,19 +58,19 @@ if (!not_cran | !hasData) {
 #    labs(x = "Year", y = "File size", color = "File type") +
 #    scale_y_log10()
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  find_file_name(year = "1999", file_type = "detail")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  find_file_name
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  noaastormevents:::download_storm_data
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  create_storm_data
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  library(hurricaneexposuredata)
 #  library(hurricaneexposure)
 #  
@@ -82,11 +83,11 @@ if (!not_cran | !hasData) {
 #          as.data.frame() %>%
 #          pander::pander(justify = "cl", split.cells = c("20%","80%"))
 
-## ----message = FALSE-----------------------------------------------------
+## ----message = FALSE----------------------------------------------------------
 #  events_2015 <- create_storm_data(date_range = c("2015-01-01", "2015-12-31"))
 #  slice(events_2015, 1:3)
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  events_2015 %>%
 #    group_by(EVENT_TYPE) %>%
 #    summarize(N = n()) %>%
@@ -94,7 +95,7 @@ if (!not_cran | !hasData) {
 #    mutate(N = prettyNum(N, big.mark = ",")) %>%
 #    knitr::kable(col.names = c("Event type", "Number of events in 2015"))
 
-## ----fig.width = 8, fig.height = 8, echo = FALSE, fig.align = "center"----
+## ----fig.width = 8, fig.height = 8, echo = FALSE, fig.align = "center"--------
 #  events_2015 %>%
 #    select(BEGIN_DATE_TIME, EVENT_TYPE) %>%
 #    mutate(date = str_extract(BEGIN_DATE_TIME, ".+\\ "),
@@ -113,7 +114,7 @@ if (!not_cran | !hasData) {
 #    scale_x_date(date_labels = "%m/%d", date_breaks = "4 months") +
 #    theme_classic()
 
-## ----fig.height = 3.5, fig.width = 5, echo = FALSE, fig.align = "center"----
+## ----fig.height = 3.5, fig.width = 5, echo = FALSE, fig.align = "center"------
 #  events_2015 %>%
 #    mutate(date = substring(BEGIN_DATE_TIME, 1, 9),
 #           date = dmy(date),
@@ -127,7 +128,7 @@ if (!not_cran | !hasData) {
 #    labs(x = "Number of events per episode",
 #         y = "Largest difference in begin dates\nacross events in the episode")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  events_2015 %>%
 #    select(EPISODE_ID, STATE) %>%
 #    group_by(EPISODE_ID) %>%
@@ -154,7 +155,7 @@ if (!not_cran | !hasData) {
 #    coord_map() +
 #    theme_void()
 
-## ----echo = FALSE, fig.align = "center", fig.width = 6, fig.height = 4----
+## ----echo = FALSE, fig.align = "center", fig.width = 6, fig.height = 4--------
 #  top_episodes <- events_2015 %>%
 #    group_by(EPISODE_ID) %>%
 #    summarize(n = n()) %>%
@@ -173,7 +174,7 @@ if (!not_cran | !hasData) {
 #    dist("canberra") %>%
 #    hclust()
 
-## ----echo = FALSE, fig.align = "center", fig.width = 6, fig.height = 3.5----
+## ----echo = FALSE, fig.align = "center", fig.width = 6, fig.height = 3.5------
 #  events_2015 %>%
 #    filter(EPISODE_ID %in% top_episodes$EPISODE_ID) %>%
 #    group_by(EPISODE_ID, EVENT_TYPE) %>%
@@ -191,7 +192,7 @@ if (!not_cran | !hasData) {
 #    scale_x_discrete(position = "top") +
 #    scale_fill_viridis(option = "A", direction = -1)
 
-## ----echo = FALSE, fig.align = "center", fig.width = 6, fig.height = 10----
+## ----echo = FALSE, fig.align = "center", fig.width = 6, fig.height = 10-------
 #  b <- events_2015 %>%
 #    group_by(EVENT_TYPE) %>%
 #    mutate(n_events = n()) %>%
@@ -208,7 +209,7 @@ if (!not_cran | !hasData) {
 #    hclust()
 #  plot(as.dendrogram(b, hang = 0.25), horiz = TRUE, axes = FALSE)
 
-## ----echo = FALSE, fig.height = 6, fig.width = 8, fig.align = "center"----
+## ----echo = FALSE, fig.height = 6, fig.width = 8, fig.align = "center"--------
 #  events_2015 %>%
 #    group_by(EVENT_TYPE) %>%
 #    mutate(n_events = n()) %>%
@@ -231,7 +232,7 @@ if (!not_cran | !hasData) {
 #    scale_fill_viridis(option = "A", direction = -1, begin = 0.1, end = 0.9) +
 #    labs(x = "", y = "", fill = "Number of reported events in the episode")
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  events_2015 %>%
 #    group_by(SOURCE) %>%
 #    summarize(N = n()) %>%
@@ -267,7 +268,7 @@ if (!not_cran | !hasData) {
 #    scale_x_discrete(position = "top") +
 #    scale_fill_viridis(option = "C", direction = -1)
 
-## ----echo = FALSE, fig.height = 8, fig.width = 6, fig.align = "centers"----
+## ----echo = FALSE, fig.height = 8, fig.width = 6, fig.align = "centers"-------
 #  events_2015 %>%
 #    group_by(STATE) %>%
 #    summarize(n = n()) %>%
@@ -277,7 +278,7 @@ if (!not_cran | !hasData) {
 #    labs(x = "Number of listed events in 2015", y = "") +
 #    theme_classic()
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  events_2015 %>%
 #    group_by(EVENT_TYPE) %>%
 #    summarize(n = n(),
@@ -295,7 +296,7 @@ if (!not_cran | !hasData) {
 #    pander::pander(split.cells = c(20, 60),
 #                   justify = "rl")
 
-## ----echo = FALSE, fig.width = 9, fig.height = 6, fig.align = "center"----
+## ----echo = FALSE, fig.width = 9, fig.height = 6, fig.align = "center"--------
 #  events_2015 %>%
 #    filter(!is.na(BEGIN_LAT) & !(is.na(BEGIN_LON))) %>%
 #    filter(!(STATE %in% c("GULF OF MEXICO", "ALASKA", "GUAM", "ATLANTIC NORTH",
@@ -312,7 +313,7 @@ if (!not_cran | !hasData) {
 #    theme_void() +
 #    facet_wrap(~ MONTH_NAME)
 
-## ----echo = FALSE, fig.width = 9, fig.height = 6, fig.align = "center"----
+## ----echo = FALSE, fig.width = 9, fig.height = 6, fig.align = "center"--------
 #  events_2015 %>%
 #    filter(!is.na(BEGIN_LAT) & !(is.na(BEGIN_LON))) %>%
 #    filter(!(STATE %in% c("GULF OF MEXICO", "ALASKA", "GUAM", "ATLANTIC NORTH",
@@ -332,7 +333,7 @@ if (!not_cran | !hasData) {
 #    theme_void() +
 #    facet_wrap(~ EVENT_TYPE)
 
-## ----echo = FALSE, fig.width = 7, fig.height = 5, fig.align = "center"----
+## ----echo = FALSE, fig.width = 7, fig.height = 5, fig.align = "center"--------
 #  events_2015 %>%
 #    filter(!is.na(BEGIN_LAT) & !(is.na(BEGIN_LON)) &
 #          !is.na(END_LAT) & !(is.na(END_LON))) %>%
@@ -352,7 +353,7 @@ if (!not_cran | !hasData) {
 #    coord_map() +
 #    facet_wrap(~ EVENT_TYPE, ncol = 3)
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  events_2015 %>%
 #    group_by(CZ_TYPE, EVENT_TYPE) %>%
 #    summarize(n_events = n()) %>%
@@ -399,7 +400,7 @@ if (!not_cran | !hasData) {
 #    theme(legend.position = "top") +
 #    labs(fill = "Number of events")
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  events_2015 %>%
 #    filter(CZ_TYPE == "Z" & EVENT_NARRATIVE != "") %>%
 #      filter(!(STATE %in% c("GULF OF MEXICO", "ALASKA", "GUAM", "ATLANTIC NORTH",
@@ -414,7 +415,7 @@ if (!not_cran | !hasData) {
 #    as.data.frame() %>%
 #    pander::pander(split.cells = c(15, 15, 50), justify = "ccl")
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  z_events_2015 <- events_2015 %>%
 #    dplyr::select_(~ BEGIN_YEARMONTH, ~ BEGIN_DAY, ~ END_YEARMONTH, ~ END_DAY,
 #                     ~ EPISODE_ID, ~EVENT_ID, ~ STATE, ~ CZ_TYPE, ~ CZ_NAME,
@@ -426,7 +427,7 @@ if (!not_cran | !hasData) {
 #    dplyr::filter_(~ cz_type == "Z") %>%
 #    match_forecast_county()
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  outside_events <- z_events_2015 %>%
 #    filter(state %in% c("GULF OF MEXICO", "GUAM", "ATLANTIC NORTH",
 #                                      "LAKE HURON", "LAKE ST CLAIR", "AMERICAN SAMOA",
@@ -435,7 +436,7 @@ if (!not_cran | !hasData) {
 #                                      "LAKE ONTARIO", "VIRGIN ISLANDS", "HAWAII", "ALASKA")) %>%
 #    filter(is.na(fips))
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  outside_events %>%
 #    mutate(state = stringr::str_to_title(state)) %>%
 #    group_by(state) %>%
@@ -443,7 +444,7 @@ if (!not_cran | !hasData) {
 #    arrange(desc(n)) %>%
 #    knitr::kable(col.names = c("State", "Number of events listed by forecast zone"))
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  continental_events <- z_events_2015 %>%
 #    filter(!(state %in% c("GULF OF MEXICO", "GUAM", "ATLANTIC NORTH",
 #                                      "LAKE HURON", "LAKE ST CLAIR", "AMERICAN SAMOA",
@@ -452,7 +453,7 @@ if (!not_cran | !hasData) {
 #                                      "LAKE ONTARIO", "VIRGIN ISLANDS", "HAWAII", "ALASKA"))) %>%
 #    filter(is.na(fips))
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  mountain_words <- c("mountains", "mountain", "valley", "valleys", "divide", "range",
 #                      "ridge", "ridges", "gap", "front", "cascades", "foothills", "plateau",
 #                      "highlands", "mtns", "hills", "mesa", "mesas", "vly", "peak",
@@ -488,7 +489,7 @@ if (!not_cran | !hasData) {
 #    as.data.frame() %>%
 #    pander::pander(split.cells = c(10, 50, 10), big.mark = ",", justify = "llc")
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  continental_events %>%
 #    dplyr::group_by(event_type) %>%
 #    dplyr::summarize(mountain_words = sum(has_mountain_words),
@@ -499,7 +500,7 @@ if (!not_cran | !hasData) {
 #    knitr::kable(col.names = c("Event type", "Mountain words", "Water words", "Adjacent words",
 #                               "Other words"))
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  continental_events %>%
 #    filter(!has_mountain_words & !has_water_words & !has_adjacent_words & !has_other_words) %>%
 #    select(cz_name, state) %>%
@@ -539,7 +540,7 @@ if (!not_cran | !hasData) {
 #    theme(legend.position = "top") +
 #    labs(fill = "Number of events")
 
-## ----eval = FALSE--------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  z_events_2015 %>%
 #    filter(cz_type == "Z") %>%
 #    select(cz_name, state, fips) %>%
@@ -547,7 +548,7 @@ if (!not_cran | !hasData) {
 #    filter(str_detect(cz_name, "Lake") & !is.na(fips))  %>%
 #    distinct()
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  c_events_2015 <- events_2015 %>%
 #    dplyr::select_(~ BEGIN_YEARMONTH, ~ BEGIN_DAY, ~ END_YEARMONTH, ~ END_DAY,
 #                     ~ EPISODE_ID, ~EVENT_ID, ~ STATE, ~ CZ_TYPE, ~ CZ_NAME,
@@ -561,33 +562,33 @@ if (!not_cran | !hasData) {
 #  
 #  county_events_2015 <- bind_rows(c_events_2015, filter(z_events_2015, !is.na(fips)))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  county_events_2015 %>% filter(event_id == "582970")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  parse_damage
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  county_damage_2015 <- county_events_2015 %>%
 #    dplyr::select(episode_id , event_id, fips, event_type, contains("damage")) %>%
 #    tidyr::gather(key = impact, value = amount, -event_type, -event_id, -episode_id, -fips) %>%
 #    dplyr::mutate(amount = parse_damage(amount))
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  county_events_2015 %>%
 #    filter(episode_id == "100823" & fips == 45035) %>%
 #    select(event_type, contains("damage"), cz_name, state, event_narrative, episode_narrative) %>%
 #    as.data.frame() %>%
 #    pander::pander()
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  county_events_2015 %>%
 #    filter(episode_id == "99142" & fips == 2023) %>%
 #    select(event_type, contains("damage"), cz_name, state, event_narrative, episode_narrative) %>%
 #    as.data.frame() %>%
 #    pander::pander()
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  a <- county_damage_2015 %>%
 #    group_by(event_id) %>%
 #    summarize(episode_id = first(episode_id),
@@ -605,7 +606,7 @@ if (!not_cran | !hasData) {
 #    group_by(zero_range) %>%
 #    count()
 
-## ----echo = FALSE, warning = FALSE, message = FALSE----------------------
+## ----echo = FALSE, warning = FALSE, message = FALSE---------------------------
 #  county_damage_2015 %>%
 #    left_join(county_events_2015 %>% select(fips, cz_name, state, episode_narrative, event_id)) %>%
 #    unite(location, cz_name, state, sep = ", ") %>%
@@ -627,7 +628,7 @@ if (!not_cran | !hasData) {
 #    as.data.frame() %>%
 #    pander::pander(split.cells = c(5, 5, 15, 35), justify = "lcll")
 
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 #  county_damage_2015 %>%
 #    group_by(event_type) %>%
 #    dplyr::mutate(tot_amount = sum(amount)) %>%
@@ -647,7 +648,7 @@ if (!not_cran | !hasData) {
 #    knitr::kable(col.names = c("Event type", "# Events", "Total damage", "Median damage",
 #                               "Maximum damage"))
 
-## ----echo = FALSE, fig.width = 6, fig.height = 7-------------------------
+## ----echo = FALSE, fig.width = 6, fig.height = 7------------------------------
 #  county_damage_2015 %>%
 #    filter(!is.na(amount)) %>%
 #    group_by(event_id) %>%
@@ -659,7 +660,8 @@ if (!not_cran | !hasData) {
 #                              labels = c("Damage", "No damage"))) %>%
 #    group_by(event_type, no_damage) %>%
 #    count() %>%
-#    ggplot(aes(x = fct_reorder(event_type, n, fun = sum), y = n, fill = no_damage)) +
+#    mutate(event_type = as_factor(event_type)) %>%
+#    ggplot(aes(x = fct_reorder(event_type, n, .fun = sum), y = n, fill = no_damage)) +
 #    geom_bar(stat = "identity") +
 #    coord_flip() +
 #    theme_classic() +
@@ -668,7 +670,9 @@ if (!not_cran | !hasData) {
 #                       direction = -1) +
 #    labs(x = "", y = "Number of events")
 
-## ----fig.height = 10, fig.width = 7, fig.align = "center", echo = FALSE----
+## ----fig.height = 10, fig.width = 7, fig.align = "center", echo = FALSE-------
+#  library(maps)
+#  data(state.fips)
 #  ex <- county_events_2015 %>%
 #    filter(str_to_lower(state) %in% as.character(state.fips$polyname)) %>%
 #    unite(begin_date, begin_yearmonth, begin_day, sep = "-") %>%

@@ -25,10 +25,10 @@
 #'
 #' @export
 find_file_name <- function(year = NULL, file_type = "details") {
-  url <- paste0("http://www1.ncdc.noaa.gov/pub/data/swdi/",
+  url <- paste0("https://www1.ncdc.noaa.gov/pub/data/swdi/",
                 "stormevents/csvfiles/")
-  page <- htmltab::htmltab(doc = url, which = 1, rm_nodata_cols = FALSE)
-  all_file_names <- page$Name
+  page <- RCurl::getURL(url)
+  all_file_names <- XML::getHTMLLinks(page)
   file_year <- paste0("_d",year,"_")
   file_name <- grep(file_type, grep(file_year, all_file_names, value = TRUE),
                     value = TRUE)
@@ -49,6 +49,8 @@ find_file_name <- function(year = NULL, file_type = "details") {
 #'    user inputs to arguments in a main package function.
 #'
 #' @inheritParams create_storm_data
+#'
+#' @importFrom magrittr %>%
 process_input_args <- function(date_range = NULL, storm = NULL){
 
   if(!is.null(date_range)){
@@ -56,7 +58,8 @@ process_input_args <- function(date_range = NULL, storm = NULL){
     date_range_years <- lubridate::year(date_range)
   }
   if(!is.null(storm)){
-    storm_year <- as.numeric(gsub("[^0-9]", "", storm))
+    storm_year <- stringr::str_extract(storm, "\\-[0-9].+") %>%
+      stringr::str_remove("\\-")
     if(nchar(storm_year) != 4){
       stop("`storm` must follow the format `[storm name]-[4-digit storm year]`")
     }

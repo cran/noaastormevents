@@ -1,4 +1,4 @@
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 not_cran <- Sys.getenv("NOT_CRAN") == "true"
 hasData <- requireNamespace("hurricaneexposuredata", quietly=TRUE)
 if (!not_cran | !hasData) {
@@ -11,23 +11,23 @@ if (!not_cran | !hasData) {
     message(msg)
 }
 
-## ---- echo = FALSE, message=FALSE, warning=FALSE-------------------------
+## ---- echo = FALSE, message=FALSE, warning=FALSE------------------------------
 #  library(noaastormevents)
 
-## ----eval = FALSE--------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  library(drat)
 #  addRepo("geanders")
 #  install.packages("hurricaneexposuredata")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  sept_1999_events <- find_events(date_range = c("1999-09-14", "1999-09-18"))
 #  head(sept_1999_events)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  floyd_events <- find_events(storm = "Floyd-1999", dist_limit = 300)
 #  head(floyd_events)
 
-## ----echo = FALSE, message = FALSE, warning = FALSE----------------------
+## ----echo = FALSE, message = FALSE, warning = FALSE---------------------------
 #  library(dplyr)
 #  library(hurricaneexposuredata)
 #  data("hurr_tracks")
@@ -39,7 +39,7 @@ if (!not_cran | !hasData) {
 #    dplyr::summarize(storms = paste(storm, collapse = ", ")) %>%
 #    knitr::kable()
 
-## ----message = FALSE, warning = FALSE------------------------------------
+## ----message = FALSE, warning = FALSE-----------------------------------------
 #  library(dplyr)
 #  floyd_events %>%
 #    group_by(event_type) %>%
@@ -49,7 +49,7 @@ if (!not_cran | !hasData) {
 #                 caption = "NOAA Storm Events within 200 km and within a 5-day window of Hurricane Floyd.")
 #  
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  floyd_events %>%
 #    group_by(state, event_type) %>%
 #    summarize(n = n()) %>%
@@ -63,16 +63,16 @@ if (!not_cran | !hasData) {
 #    arrange(desc(Total)) %>%
 #    knitr::kable()
 
-## ----fig.width = 6, fig.height = 5---------------------------------------
+## ----fig.width = 6, fig.height = 5--------------------------------------------
 #  event_data <- find_events(date_range = c("1999-09-14", "1999-09-18"))
 #  map_events(event_data)
 
-## ----fig.width = 6, fig.height = 5---------------------------------------
+## ----fig.width = 6, fig.height = 5--------------------------------------------
 #  floyd_events <- find_events(storm = "Floyd-1999", dist_limit = 300)
 #  floyd_events %>%
 #    map_events(states = "all")
 
-## ----fig.width = 6, fig.height = 5---------------------------------------
+## ----fig.width = 6, fig.height = 5--------------------------------------------
 #  floyd_events %>%
 #    map_events(plot_type = "number of events",
 #               states = c("florida", "georgia", "south carolina", "north carolina",
@@ -81,12 +81,12 @@ if (!not_cran | !hasData) {
 #                          "massachusetts", "vermont", "new hampshire", "maine",
 #                          "west virginia"))
 
-## ----fig.width = 6, fig.height = 5---------------------------------------
+## ----fig.width = 6, fig.height = 5--------------------------------------------
 #  floyd_events %>%
 #    map_events(plot_type = "crop damage",
 #               states = c("north carolina", "virginia", "maryland"))
 
-## ----fig.width = 6, fig.height = 5---------------------------------------
+## ----fig.width = 6, fig.height = 5--------------------------------------------
 #  floyd_events %>%
 #    map_events(plot_type = "property damage",
 #               states = c("florida", "georgia", "south carolina", "north carolina",
@@ -95,7 +95,7 @@ if (!not_cran | !hasData) {
 #                          "massachusetts", "vermont", "new hampshire", "maine",
 #                          "west virginia"))
 
-## ----fig.width = 6, fig.height = 5---------------------------------------
+## ----fig.width = 6, fig.height = 5--------------------------------------------
 #  floyd_events %>%
 #    map_events(plot_type = "crop damage",
 #               states = c("north carolina", "virginia", "maryland"),
